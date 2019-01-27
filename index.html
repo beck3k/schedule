@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Beck Schedule</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  </head>
+  <body>
+  <div class="container">
+     <div class="title">
+          <h1 class="title">Is Beck Available?</h1>
+          <h2 class="title">I would love to work with you, but I'm not always free</h2>
+     </div>
+     <div class="items">
+        <div class="card active noselect" id="available">
+              <h1><span class="dot green"></span>Available</h1>
+              <div class="msg">
+                  <p>Feel free to contact me</p>
+              </div>
+          </div>
+          <div class="card active noselect" id="moment">
+              <h1><span class="dot yellow"></span>Spare Moment</h1>
+              <div class="msg">
+                  <p>I don't have a tone of time, but I would be willing to contact for a small time.</p>
+              </div>
+          </div>
+          <div class=card active noselect" id="no">
+              <h1><span class="dot red"></span>Not Available</h1>
+              <div class="msg">
+                  <p>Sorry, But I am not available at the current time</p>
+              </div>
+          </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="check.js"></script>
+  </body>
+</html>
