@@ -1,6 +1,6 @@
 {
-  "status" : "no",
-  "msg" : "",
-  "start" : "17:00",
-  "end" : "19:00"
+  "status" : "moment",
+  "msg" : "I am working on homework, but I could spare a few mintues for a question",
+  "start" : "10:00",
+  "end" : "undefined"
 }
