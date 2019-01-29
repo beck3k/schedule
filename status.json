@@ -1,6 +1,1 @@
-{
-  "status" : "no",
-  "msg" : "I am in school, will be available during lunch",
-  "start" : "10:00",
-  "end" : "undefined"
-}
+{"status":"available","msg":"","start":"10:00","end":"undefined"}
