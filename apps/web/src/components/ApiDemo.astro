@@ -4,7 +4,7 @@ import { API_URL } from '../config';
 
 <section class="api-demo">
 	<h2>API Demo</h2>
-	<p class="hint">Calls the schedule-api worker and shows the response.</p>
+	<p class="hint">Calls <code>GET /hello</code> and decodes the MessagePack response.</p>
 	<div class="controls">
 		<button id="fetch-btn" type="button">Call API</button>
 		<input id="api-result" type="text" readonly placeholder="Response appears here" aria-label="API response" />
@@ -14,12 +14,17 @@ import { API_URL } from '../config';
 	</p>
 </section>
 
-<script is:inline define:vars={{ apiUrl: API_URL }}>
-	const btn = document.getElementById('fetch-btn');
-	const input = document.getElementById('api-result');
+<script>
+	import { HelloResponseSchema, unpack } from '@scheduler/shared';
+	import { API_URL } from '../config';
+
+	const btn = document.getElementById('fetch-btn') as HTMLButtonElement | null;
+	const input = document.getElementById('api-result') as HTMLInputElement | null;
 
 	btn?.addEventListener('click', async () => {
-		if (!apiUrl) {
+		if (!input || !btn) return;
+
+		if (!API_URL) {
 			input.value = 'PUBLIC_API_URL is not configured';
 			return;
 		}
@@ -28,11 +33,13 @@ import { API_URL } from '../config';
 		btn.disabled = true;
 
 		try {
-			const response = await fetch(apiUrl);
+			const response = await fetch(`${API_URL}/hello`);
 			if (!response.ok) {
 				throw new Error(`${response.status} ${response.statusText}`);
 			}
-			input.value = await response.text();
+
+			const body = HelloResponseSchema.parse(unpack(await response.arrayBuffer()));
+			input.value = body.message;
 		} catch (error) {
 			const message = error instanceof Error ? error.message : 'Request failed';
 			input.value = `Error: ${message}`;
