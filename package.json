@@ -1,0 +1,20 @@
+{
+    "name": "scheduler",
+    "private": true,
+    "workspaces": ["apps/*", "packages/*"],
+    "scripts": {
+      "dev:frontend": "bun --cwd apps/frontend run dev",
+      "dev:api": "bun --cwd apps/api run dev",
+      "build": "bun --cwd apps/frontend run build && bun --cwd apps/api run build",
+      "deploy:frontend": "bun --cwd apps/frontend run deploy",
+      "deploy:api": "bun --cwd apps/api run deploy",
+      "deploy": "bun run deploy:frontend && bun run deploy:api",
+      "typecheck": "bun --cwd apps/frontend run typecheck && bun --cwd apps/api run typecheck && bun --cwd packages/shared run typecheck",
+      "lint": "biome check .",
+      "format": "biome format --write ."
+    },
+    "devDependencies": {
+      "@biomejs/biome": "^2.0.0",
+      "typescript": "^5.0.0"
+    }
+  }
