@@ -1,0 +1,110 @@
+---
+import { API_URL } from '../config';
+---
+
+<section class="api-demo">
+	<h2>API Demo</h2>
+	<p class="hint">Calls the schedule-api worker and shows the response.</p>
+	<div class="controls">
+		<button id="fetch-btn" type="button">Call API</button>
+		<input id="api-result" type="text" readonly placeholder="Response appears here" aria-label="API response" />
+	</div>
+	<p class="api-url">
+		API URL: <code>{API_URL || '(set PUBLIC_API_URL for production builds)'}</code>
+	</p>
+</section>
+
+<script is:inline define:vars={{ apiUrl: API_URL }}>
+	const btn = document.getElementById('fetch-btn');
+	const input = document.getElementById('api-result');
+
+	btn?.addEventListener('click', async () => {
+		if (!apiUrl) {
+			input.value = 'PUBLIC_API_URL is not configured';
+			return;
+		}
+
+		input.value = 'Loading…';
+		btn.disabled = true;
+
+		try {
+			const response = await fetch(apiUrl);
+			if (!response.ok) {
+				throw new Error(`${response.status} ${response.statusText}`);
+			}
+			input.value = await response.text();
+		} catch (error) {
+			const message = error instanceof Error ? error.message : 'Request failed';
+			input.value = `Error: ${message}`;
+		} finally {
+			btn.disabled = false;
+		}
+	});
+</script>
+
+<style>
+	.api-demo {
+		margin-top: 2rem;
+		padding: 1.25rem;
+		border-radius: 12px;
+		background: rgba(255, 255, 255, 0.9);
+		border: 1px solid rgba(17, 24, 39, 0.08);
+		max-width: 36rem;
+	}
+
+	h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.125rem;
+		color: #111827;
+	}
+
+	.hint {
+		margin: 0 0 1rem;
+		color: #4b5563;
+		font-size: 0.9375rem;
+	}
+
+	.controls {
+		display: flex;
+		gap: 0.75rem;
+		align-items: stretch;
+	}
+
+	button {
+		flex-shrink: 0;
+		padding: 0.625rem 1rem;
+		border: none;
+		border-radius: 8px;
+		color: white;
+		font-weight: 500;
+		cursor: pointer;
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+	}
+
+	button:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	input {
+		flex: 1;
+		min-width: 0;
+		padding: 0.625rem 0.75rem;
+		border: 1px solid #d1d5db;
+		border-radius: 8px;
+		font: inherit;
+		color: #111827;
+		background: white;
+	}
+
+	.api-url {
+		margin: 0.75rem 0 0;
+		font-size: 0.8125rem;
+		color: #6b7280;
+	}
+
+	code {
+		font-family:
+			ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+	}
+</style>

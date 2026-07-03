@@ -8,6 +8,7 @@
 	"scripts": {
 		"dev:web": "bun run --cwd apps/web dev",
 		"dev:api": "bun run --cwd apps/api dev",
+		"dev": "bun run dev:api & bun run dev:web",
 		"build": "bun run --cwd apps/web build && bun run --cwd apps/api build",
 		"deploy:web": "bun run --cwd apps/web deploy",
 		"deploy:api": "bun run --cwd apps/api deploy",

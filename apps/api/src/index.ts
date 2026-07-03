@@ -1,5 +1,6 @@
 import { DurableObject } from 'cloudflare:workers';
 import { APP_NAME } from '@scheduler/shared';
+import { corsHeaders } from './cors';
 
 /**
  * Welcome to Cloudflare Workers! This is your first Durable Objects application.
@@ -37,7 +38,20 @@ export default {
 	 * @param ctx - The execution context of the Worker
 	 * @returns The response to be sent back to the client
 	 */
-	async fetch(_request, env, _ctx): Promise<Response> {
+	async fetch(request, env, _ctx): Promise<Response> {
+		const headers = corsHeaders(request, env.ALLOWED_ORIGINS);
+
+		if (request.method === 'OPTIONS') {
+			return new Response(null, { headers });
+		}
+
+		if (!env.MY_DURABLE_OBJECT) {
+			return new Response('Durable Object binding missing', {
+				status: 500,
+				headers,
+			});
+		}
+
 		// Create a stub to open a communication channel with the Durable Object
 		// instance named "foo".
 		//
@@ -49,6 +63,11 @@ export default {
 		// the remote Durable Object instance.
 		const greeting = await stub.sayHello('world');
 
-		return new Response(greeting);
+		return new Response(greeting, {
+			headers: {
+				...headers,
+				'Content-Type': 'text/plain; charset=utf-8',
+			},
+		});
 	},
 } satisfies ExportedHandler<Env>;

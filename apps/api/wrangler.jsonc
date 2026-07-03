@@ -25,7 +25,17 @@
 		"enabled": true
 	},
 	"upload_source_maps": true,
-	"compatibility_flags": ["nodejs_compat"]
+	"compatibility_flags": ["nodejs_compat"],
+	"vars": {
+		"ALLOWED_ORIGINS": "*"
+	},
+	"env": {
+		"production": {
+			"vars": {
+				"ALLOWED_ORIGINS": "https://schedule-web.YOUR_SUBDOMAIN.workers.dev"
+			}
+		}
+	}
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
