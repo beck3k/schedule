@@ -1,16 +1,19 @@
 {
-  "name": "api",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev",
-    "start": "wrangler dev",
-    "cf-typegen": "wrangler types"
-  },
-  "devDependencies": {
-    "@types/node": "^26.1.0",
-    "typescript": "^5.5.2",
-    "wrangler": "^4.107.0"
-  }
+	"name": "@scheduler/api",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy",
+		"build": "wrangler deploy --dry-run --outdir dist",
+		"typecheck": "tsc --noEmit",
+		"cf-typegen": "wrangler types"
+	},
+	"dependencies": {
+		"@scheduler/shared": "workspace:*"
+	},
+	"devDependencies": {
+		"@types/node": "^26.1.0",
+		"wrangler": "^4.107.0"
+	}
 }

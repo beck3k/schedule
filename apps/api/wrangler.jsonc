@@ -4,14 +4,12 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "api",
+	"name": "scheduler-api",
 	"main": "src/index.ts",
 	"compatibility_date": "2026-07-03",
 	"migrations": [
 		{
-			"new_sqlite_classes": [
-				"MyDurableObject"
-			],
+			"new_sqlite_classes": ["MyDurableObject"],
 			"tag": "v1"
 		}
 	],
@@ -27,9 +25,7 @@
 		"enabled": true
 	},
 	"upload_source_maps": true,
-	"compatibility_flags": [
-		"nodejs_compat"
-	]
+	"compatibility_flags": ["nodejs_compat"]
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
