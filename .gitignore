@@ -23,6 +23,9 @@ build/
 out/
 *.tsbuildinfo
 
+# Astro
+.astro/
+
 # Cloudflare Wrangler
 .wrangler/
 

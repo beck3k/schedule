@@ -6,13 +6,13 @@
 		"packages/*"
 	],
 	"scripts": {
-		"dev:frontend": "bun run --if-present --cwd apps/frontend dev",
+		"dev:web": "bun run --cwd apps/web dev",
 		"dev:api": "bun run --cwd apps/api dev",
-		"build": "bun run --if-present --cwd apps/frontend build && bun run --cwd apps/api build",
-		"deploy:frontend": "bun run --if-present --cwd apps/frontend deploy",
+		"build": "bun run --cwd apps/web build && bun run --cwd apps/api build",
+		"deploy:web": "bun run --cwd apps/web deploy",
 		"deploy:api": "bun run --cwd apps/api deploy",
-		"deploy": "bun run deploy:frontend && bun run deploy:api",
-		"typecheck": "bun run --if-present --cwd apps/frontend typecheck && bun run --cwd apps/api typecheck && bun run --cwd packages/shared typecheck",
+		"deploy": "bun run deploy:web && bun run deploy:api",
+		"typecheck": "bun run --cwd apps/web typecheck && bun run --cwd apps/api typecheck && bun run --cwd packages/shared typecheck",
 		"lint": "biome check .",
 		"format": "biome format --write ."
 	},

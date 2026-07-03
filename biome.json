@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["**", "!apps/api/worker-configuration.d.ts", "!.vscode"]
+		"includes": ["**", "!apps/api/worker-configuration.d.ts", "!.vscode", "!**/*.astro", "!**/*.svg"]
 	},
 	"formatter": {
 		"enabled": true,
