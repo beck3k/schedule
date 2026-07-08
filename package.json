@@ -14,6 +14,7 @@
 		"deploy:api": "bun run --cwd apps/api deploy",
 		"deploy": "bun run deploy:web && bun run deploy:api",
 		"typecheck": "bun run --cwd apps/web typecheck && bun run --cwd apps/api typecheck && bun run --cwd packages/shared typecheck",
+		"calendar": "bun run --cwd apps/api calendar",
 		"lint": "biome check .",
 		"format": "biome format --write ."
 	},
